@@ -21,7 +21,7 @@ namespace RegexPostcodes.Tests
             Assert.That(_postcodeChecker.ContainsPostcode("EC1A 1BB"), Is.True);
             Assert.That(_postcodeChecker.ContainsPostcode("DN55 1PT"), Is.True);
             Assert.That(_postcodeChecker.ContainsPostcode("W1A 1HQ"), Is.True);
-            Assert.That(_postcodeChecker.ContainsPostcode("M1 1AA"), Is.True);
+            Assert.That(_postcodeChecker.ContainsPostcode("M1 5AN"), Is.True);
             Assert.That(_postcodeChecker.ContainsPostcode("M60 1NW"), Is.True);
             Assert.That(_postcodeChecker.ContainsPostcode("CR2 6XH"), Is.True);
         }
