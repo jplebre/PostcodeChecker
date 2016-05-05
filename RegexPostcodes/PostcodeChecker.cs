@@ -19,14 +19,6 @@ namespace RegexPostcodes
             return match.Success ? true : false;
         }
 
-        private static Match PostcodeMatch(string freeText)
-        {
-            var regex = new Regex(postcodeRegex);
-            var match = regex.Match(freeText);
-            return match;
-        }
-
-
         public string ExtractPostcode(string freeText)
         {
             var match = PostcodeMatch(freeText);
@@ -52,6 +44,13 @@ namespace RegexPostcodes
             }
 
             return PostcodeType.Full;
+        }
+
+        private static Match PostcodeMatch(string freeText)
+        {
+            var regex = new Regex(postcodeRegex);
+            var match = regex.Match(freeText);
+            return match;
         }
     }
 }
