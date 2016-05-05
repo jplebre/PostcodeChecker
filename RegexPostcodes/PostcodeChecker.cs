@@ -11,7 +11,7 @@ namespace RegexPostcodes
         // postcode extraction:
         // http://stackoverflow.com/questions/23930574/pattern-match-a-partial-british-postcode
         const string postcodeRegex =
-            @"(([gG][iI][rR] {0,}0[aA]{2})|((([a-pr-uwyzA-PR-UWYZ][a-hk-yA-HK-Y]?[0-9][0-9]?[abehmnprv-yABEHMNPRV-Y]?)|(([a-pr-uwyzA-PR-UWYZ][0-9][a-hjkstuwA-HJKSTUW])|([a-pr-uwyzA-PR-UWYZ][a-hk-yA-HK-Y][0-9][abehmnprv-yABEHMNPRV-Y])))( {0,}[0-9][abd-hjlnp-uw-zABD-HJLNP-UW-Z]{2})?))";
+            @"([gG][iI][rR] {0,}0[aA]{2})|(?<full>([a-pr-uwyzA-PR-UWYZ][a-pr-uwyzA-PR-UWYZ]?[0-9][0-9][abd-hjlnp-uw-zABD-HJLNP-UW-Z]{2}))|((?<first>([a-pr-uwyzA-PR-UWYZ][a-hk-yA-HK-Y]?[0-9][0-9]?[abehmnprv-yABEHMNPRV-Y]?)|(([a-pr-uwyzA-PR-UWYZ][0-9][a-hjkstuwA-HJKSTUW])|([a-pr-uwyzA-PR-UWYZ][a-hk-yA-HK-Y][0-9][abehmnprv-yABEHMNPRV-Y])))(?<second> {0,}[0-9][abd-hjlnp-uw-zABD-HJLNP-UW-Z]{2})?)";
 
         public bool ContainsPostcode(string freeText)
         {
@@ -42,6 +42,27 @@ namespace RegexPostcodes
         {
             // So the compiler doesn't complain
             Console.WriteLine("Stuff!");
+        }
+
+        public static PostcodeType DetectPostcode(string postcode)
+        {
+            var match = PostcodeMatch(postcode);
+            if (!match.Success)
+            {
+                return PostcodeType.None;
+            }
+
+            if (!string.IsNullOrEmpty(match.Groups["full"].Value))
+            {
+                return PostcodeType.Full;
+            }
+
+            if (string.IsNullOrEmpty(match.Groups["second"].Value))
+            {
+                return PostcodeType.Partial;
+            }
+
+            return PostcodeType.Full;
         }
     }
 }
