@@ -16,11 +16,7 @@ namespace RegexPostcodes
         public bool ContainsPostcode(string freeText)
         {
             Match match = PostcodeMatch(freeText);
-
-            if (match.Success)
-                return true;
-
-            return false;
+            return match.Success ? true : false;
         }
 
         private static Match PostcodeMatch(string freeText)
