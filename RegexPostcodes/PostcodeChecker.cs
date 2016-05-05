@@ -33,13 +33,6 @@ namespace RegexPostcodes
             return match.Success ? match.Value : null;
         }
 
-
-        public static void Main(string[] args)
-        {
-            // So the compiler doesn't complain
-            Console.WriteLine("Stuff!");
-        }
-
         public static PostcodeType DetectPostcode(string postcode)
         {
             var match = PostcodeMatch(postcode);
