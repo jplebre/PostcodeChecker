@@ -21,13 +21,14 @@ namespace RegexPostcodes
 
         public string ExtractPostcode(string freeText)
         {
-            var match = PostcodeMatch(freeText);
+            Match match = PostcodeMatch(freeText);
             return match.Success ? match.Value : null;
         }
 
         public static PostcodeType DetectPostcode(string postcode)
         {
-            var match = PostcodeMatch(postcode);
+            Match match = PostcodeMatch(postcode);
+
             if (!match.Success)
             {
                 return PostcodeType.None;
@@ -49,7 +50,8 @@ namespace RegexPostcodes
         private static Match PostcodeMatch(string freeText)
         {
             var regex = new Regex(postcodeRegex);
-            var match = regex.Match(freeText);
+            Match match = regex.Match(freeText);
+
             return match;
         }
     }
