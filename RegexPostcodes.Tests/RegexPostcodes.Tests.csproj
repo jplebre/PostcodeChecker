@@ -40,6 +40,7 @@
   <ItemGroup>
     <Compile Include="ContainsPostcodeReturns.cs" />
     <Compile Include="DetectPostcode.cs" />
+    <Compile Include="InvalidPostcodesAreNotDetected.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="ExtractPostcodeReturns.cs" />
   </ItemGroup>
