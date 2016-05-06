@@ -39,11 +39,20 @@ namespace RegexPostcodes.Tests
         }
 
         [Test]
-        public void ReturnsTrueWhenFullPostcodeIsEnteredAndOtherWords()
+        public void ReturnsCorrectTypeOfPostcodeWhenOtherTextIsEntered()
         {
             Assert.That(PostcodeChecker.DetectPostcode("Pizza EC1A 1BB kebab"), Is.EqualTo(PostcodeType.Full));
             Assert.That(PostcodeChecker.DetectPostcode("Pizza EC1A1BB kebab"), Is.EqualTo(PostcodeType.Full));
             Assert.That(PostcodeChecker.DetectPostcode("Pizza EC1A kebab"), Is.EqualTo(PostcodeType.Partial));
+            Assert.That(PostcodeChecker.DetectPostcode("Pizza 2GO kebab"), Is.EqualTo(PostcodeType.None));
+        }
+
+        [Test]
+        public void NoPostcodeReturnsPostcodeTypeNone()
+        {
+            Assert.That(PostcodeChecker.DetectPostcode("Pizza"), Is.EqualTo(PostcodeType.None));
+            Assert.That(PostcodeChecker.DetectPostcode("KFC"), Is.EqualTo(PostcodeType.None));
+            Assert.That(PostcodeChecker.DetectPostcode("this is not a postcode 12"), Is.EqualTo(PostcodeType.None));
         }
     }
 }
