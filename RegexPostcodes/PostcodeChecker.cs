@@ -25,6 +25,11 @@ namespace RegexPostcodes
             return match.Success ? match.Value : null;
         }
 
+        public string ExtractPartialPostcode(string postcode)
+        {
+            throw new NotImplementedException();
+        }
+
         public static PostcodeType DetectPostcode(string postcode)
         {
             Match match = PostcodeMatch(postcode);
