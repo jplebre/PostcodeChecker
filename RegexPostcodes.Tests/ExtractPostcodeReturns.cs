@@ -16,31 +16,31 @@ namespace RegexPostcodes.Tests
         [Test]
         public void ExtractPostcode()
         {
-            Assert.That(_postcodeChecker.ExtractPostcode("EC1A 1BB"), Is.EqualTo("EC1A 1BB"));
+            Assert.That(_postcodeChecker.ExtractPostcodeFromFreeText("EC1A 1BB"), Is.EqualTo("EC1A 1BB"));
         }
 
         [Test]
         public void ExtractPostcodeWhenOtherNonPostcodeWordsExist()
         {
-            Assert.That(_postcodeChecker.ExtractPostcode("pizza EC1A 1BB"), Is.EqualTo("EC1A 1BB"));
+            Assert.That(_postcodeChecker.ExtractPostcodeFromFreeText("pizza EC1A 1BB"), Is.EqualTo("EC1A 1BB"));
         }
 
         [Test]
         public void ExtractPostcodeWhenOtherNonPostcodeWordsExistWithNoSpaces()
         {
-            Assert.That(_postcodeChecker.ExtractPostcode("pizza EC1A1BB"), Is.EqualTo("EC1A1BB"));
+            Assert.That(_postcodeChecker.ExtractPostcodeFromFreeText("pizza EC1A1BB"), Is.EqualTo("EC1A1BB"));
         }
 
         [Test]
         public void ReturnsNullWhenNoPostcodeIsEntered()
         {
-            Assert.That(_postcodeChecker.ExtractPostcode("Indian Kebab Pizza"), Is.Null);
+            Assert.That(_postcodeChecker.ExtractPostcodeFromFreeText("Indian Kebab Pizza"), Is.Null);
         }
 
         [Test]
         public void ExtractPartialPostcodeWhenOtherNonPostcodeWordsExist()
         {
-            Assert.That(_postcodeChecker.ExtractPostcode("pizza EC1A"), Is.EqualTo("EC1A"));
+            Assert.That(_postcodeChecker.ExtractPostcodeFromFreeText("pizza EC1A"), Is.EqualTo("EC1A"));
         }
     }
 }
