@@ -21,7 +21,7 @@ namespace RegexPostcodes
             return match.Success ? true : false;
         }
 
-        public string ExtractPostcode(string freeText)
+        public string ExtractPostcodeFromFreeText(string freeText)
         {
             Match match = PostcodeMatch(freeText);
             return match.Success ? match.Value : null;
@@ -29,7 +29,9 @@ namespace RegexPostcodes
 
         public string ExtractPartialPostcode(string postcode)
         {
-            throw new NotImplementedException();
+            if (DetectPostcodeType(postcode) == PostcodeType.Full)
+                return postcode.Substring(0, postcode.Length - 3).TrimEnd();
+            else return "";
         }
 
         public PostcodeType DetectPostcodeType(string postcode)
