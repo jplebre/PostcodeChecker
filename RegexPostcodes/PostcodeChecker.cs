@@ -5,13 +5,15 @@ namespace RegexPostcodes
 {
     public class PostcodeChecker
     {
-        // Slightly modified regex from Stack overflow
-        // Takes into account legal characters and formats for postcodes
-        // Does not anchor to the beginning of the string, therefore allowing for
-        // postcode extraction:
-        // http://stackoverflow.com/questions/23930574/pattern-match-a-partial-british-postcode
-        const string postcodeRegex =
-            @"([gG][iI][rR] {0,}0[aA]{2})|(?<full>([a-pr-uwyzA-PR-UWYZ][a-pr-uwyzA-PR-UWYZ]?[0-9][0-9][abd-hjlnp-uw-zABD-HJLNP-UW-Z]{2}))|((?<first>([a-pr-uwyzA-PR-UWYZ][a-hk-yA-HK-Y]?[0-9][0-9]?[abehmnprv-yABEHMNPRV-Y]?)|(([a-pr-uwyzA-PR-UWYZ][0-9][a-hjkstuwA-HJKSTUW])|([a-pr-uwyzA-PR-UWYZ][a-hk-yA-HK-Y][0-9][abehmnprv-yABEHMNPRV-Y])))(?<second> {0,}[0-9][abd-hjlnp-uw-zABD-HJLNP-UW-Z]{2})?)";
+        string _postcodeRegex = RegexRuleBuilder.PostCodeRegex;
+
+        internal string PostcodeRegex
+        {
+            get
+            {
+                return _postcodeRegex;
+            }
+        }
 
         public bool ContainsPostcode(string freeText)
         {
@@ -30,7 +32,7 @@ namespace RegexPostcodes
             throw new NotImplementedException();
         }
 
-        public static PostcodeType DetectPostcode(string postcode)
+        public PostcodeType DetectPostcodeType(string postcode)
         {
             Match match = PostcodeMatch(postcode);
 
@@ -52,9 +54,9 @@ namespace RegexPostcodes
             return PostcodeType.Full;
         }
 
-        private static Match PostcodeMatch(string freeText)
+        private Match PostcodeMatch(string freeText)
         {
-            var regex = new Regex(postcodeRegex);
+            var regex = new Regex(PostcodeRegex);
             Match match = regex.Match(freeText);
 
             return match;
